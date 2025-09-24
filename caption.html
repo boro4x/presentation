@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сравнение доступных и недоступных таблиц</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      margin: 2em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2em;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    p.caption-incorrect {
+      font-style: italic;
+      color: #777;
+    }
+    caption {
+      caption-side: bottom;
+      font-style: italic;
+      color: #333;
+      text-align: left;
+      padding-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Сравнение доступности таблиц</h1>
+  <p>Ниже представлены два примера одной и той же таблицы с информацией о фруктах. Первый пример показывает неправильный, недоступный подход, где подпись не связана с таблицей программно. Второй пример — это правильный и доступный метод, где используется семантически верный тег <code>&lt;caption&gt;</code>, а его расположение изменено с помощью CSS.</p>
+
+  <hr>
+
+  <h2>Информация о популярных фруктах (Недоступная таблица)</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Фрукт</th>
+        <th>Цвет</th>
+        <th>Страна происхождения</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Яблоко</td>
+        <td>Красный / Зеленый</td>
+        <td>Казахстан</td>
+      </tr>
+      <tr>
+        <td>Банан</td>
+        <td>Желтый</td>
+        <td>Малайзия</td>
+      </tr>
+      <tr>
+        <td>Виноград</td>
+        <td>Фиолетовый / Зеленый</td>
+        <td>Центральная Азия</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="caption-incorrect">В этой таблице представлена краткая информация о некоторых популярных фруктах, их цвете и регионе происхождения.</p>
+
+  <hr>
+
+  <h2>Информация о популярных фруктах (Доступная таблица)</h2>
+
+  <table>
+    <caption>В этой таблице представлена краткая информация о некоторых популярных фруктах, их цвете и регионе происхождения.</caption>
+    <thead>
+      <tr>
+        <th>Фрукт</th>
+        <th>Цвет</th>
+        <th>Страна происхождения</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Яблоко</td>
+        <td>Красный / Зеленый</td>
+        <td>Казахстан</td>
+      </tr>
+      <tr>
+        <td>Банан</td>
+        <td>Желтый</td>
+        <td>Малайзия</td>
+      </tr>
+      <tr>
+        <td>Виноград</td>
+        <td>Фиолетовый / Зеленый</td>
+        <td>Центральная Азия</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
