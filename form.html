@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Доступная форма: подписи и инструкции</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #F4F5F7; color: #1A1A1A;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 3rem auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 { 
+      margin-top: 0; 
+      font-size: 1.75rem; 
+      color: #1A1A1A; 
+    }
+
+    .intro { 
+      margin-bottom: 1.5rem; 
+      color: #595959; 
+      border-bottom: 1px solid #E5E7EB;
+      padding-bottom: 1rem;
+    }
+
+    .form-group { margin-bottom: 1.5rem; }
+
+    label { 
+      display: block; 
+      font-weight: 600; 
+      margin-bottom: 0.3rem; 
+      color: #1A1A1A; 
+    }
+
+    .faux-label { 
+      display: block; 
+      font-weight: 600; 
+      margin-bottom: 0.3rem; 
+      color: #1A1A1A; 
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #CCCCCC;
+      border-radius: 4px;
+      background: #fff;
+      color: #1A1A1A;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:hover,
+    input[type="password"]:hover {
+      border-color: #2563EB;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0057D9;
+      box-shadow: 0 0 0 3px rgba(0, 87, 217, 0.2);
+    }
+
+    .hint {
+      margin-top: 0.4rem;
+      font-size: 0.875rem;
+      color: #595959;
+      background-color: #F9FAFB;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .button-group { text-align: right; }
+
+    button {
+      font-size: 1rem; 
+      font-weight: 600;
+      color: #fff; 
+      background-color: #0057D9;
+      border: none; 
+      border-radius: 6px;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background-color: #004BB5;
+      transform: translateY(-1px);
+    }
+
+    button:focus { 
+      outline: none; 
+      box-shadow: 0 0 0 3px rgba(0,87,217,0.4); 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Доступная форма: подписи и инструкции</h1>
+    <p class="intro">
+      Пожалуйста, заполните все поля формы.  
+      Имя и фамилия должны быть введены латиницей.  
+      Пароль должен содержать не менее 8 символов, включая хотя бы одну букву и одну цифру.  
+      Внимательно проверяйте данные перед отправкой.
+    </p>
+    <form>
+      <!-- Имя — с ARIA-связью -->
+      <div class="form-group">
+        <label for="firstname">Имя</label>
+        <input type="text" id="firstname" name="firstname" aria-describedby="hint-firstname">
+        <div id="hint-firstname" class="hint">Используйте латинские буквы, без пробелов</div>
+      </div>
+
+      <!-- Фамилия — несвязанная инструкция -->
+      <div class="form-group">
+        <span class="faux-label">Фамилия</span>
+        <input type="text" id="lastname" name="lastname">
+        <div class="hint">Заполните фамилию латиницей</div>
+      </div>
+
+      <!-- Логин — несвязанная инструкция -->
+      <div class="form-group">
+        <span class="faux-label">Логин (Username)</span>
+        <input type="text" id="username" name="username">
+        <div class="hint">Латиница, 6–12 символов без пробелов</div>
+      </div>
+
+      <!-- Пароль — с ARIA-связью -->
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" id="password" name="password" aria-describedby="hint-pw1 hint-pw2">
+        <div id="hint-pw1" class="hint">Минимум 8 символов</div>
+        <div id="hint-pw2" class="hint">Должен содержать букву и цифру</div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit">Отправить</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
