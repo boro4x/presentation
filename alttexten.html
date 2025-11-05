@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alt Text Demonstration</title>
+    <style>
+        /* Simple styling for visibility */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .image-container {
+            margin-bottom: 50px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: inline-block;
+        }
+        img {
+            display: block;
+            max-width: 512px;
+            height: auto;
+            border: 2px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Demonstrating the Difference Between Short and Long Alt Text</h1>
+    <p>This page uses the same image (512x512 PNG) twice with different alternative descriptions.</p>
+    <p><strong>Goal:</strong> To show how assistive technologies (screen readers) will interpret the image, depending on the length and detail of the `alt` attribute.</p>
+
+    <hr>
+
+    <div class="image-container">
+        <h2>Short Alt Text</h2>
+
+        <img src="image.png" alt="A_couple_of_tourists __ admiring the view of a Bavarian town and the snowy Alps on a sunny day.">
+        <p><em>If the image fails to load, this short text will appear in its place.</em></p>
+    </div>
+
+    <hr>
+
+    <div class="image-container">
+        <h2>Long Alt Text (Length: 228 characters)</h2>
+
+        <img src="image.png" alt="A man in a blue jacket and a woman in a yellow sweater standing on a wooden balcony against the backdrop of a picturesque Bavarian town. An aerial view of red-tiled roofs and narrow streets. The majestic, snow-capped peaks of the Alps are clearly visible on the horizon. Sunny day, deep blue sky.">
+        <p><em>If the image fails to load, this long, detailed text will appear in its place.</em></p>
+    </div>
+
+</body>
+</html>
