@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстрация доступности: Группировка элементов</title>
+    <style>
+        :root {
+            --color-correct: #2e7d32; /* Зеленый */
+            --color-warning: #ed6c02; /* Оранжевый */
+            --color-aria: #0288d1;    /* Синий */
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        /* Общие стили для всех трех областей */
+        .filter-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            width: 320px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: none;
+            border-top: 8px solid; /* Тот самый цветовой акцент */
+            margin: 0;
+        }
+
+        /* Сброс стандартных стилей fieldset */
+        fieldset.filter-card {
+            display: block;
+            margin-inline-start: 0;
+            margin-inline-end: 0;
+            padding-block-start: 24px;
+            padding-inline-start: 24px;
+            padding-inline-end: 24px;
+            padding-block-end: 24px;
+            min-inline-size: min-content;
+        }
+
+        /* Делаем legend и h3 визуально одинаковыми */
+        .filter-card legend, 
+        .filter-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            padding: 0;
+            display: block;
+            color: #333;
+            float: left; /* Для корректного отображения legend в некоторых браузерах */
+            width: 100%;
+        }
+
+        /* Специфические цвета для акцентов */
+        .correct { border-top-color: var(--color-correct); }
+        .warning { border-top-color: var(--color-warning); }
+        .aria { border-top-color: var(--color-aria); }
+
+        /* Стили для списка чекбоксов */
+        .checkbox-group {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            clear: both;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Тест доступности: Контекст группы</h1>
+
+    <div class="container">
+
+        <fieldset class="filter-card correct">
+            <legend>Утренний допинг</legend>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c1-1">
+                    <label for="c1-1">Крепкий кофе</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c1-2">
+                    <label for="c1-2">Круассан с шоколадом</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c1-3">
+                    <label for="c1-3">Витаминка</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c1-4">
+                    <label for="c1-4">Стакан воды</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c1-5">
+                    <label for="c1-5">Свежие новости</label>
+                </div>
+            </div>
+            <div class="description">Используется fieldset и legend. Скринридер должен объявлять название группы.</div>
+        </fieldset>
+
+        <fieldset class="filter-card warning">
+            <h3>Музыкальный вайб</h3>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c2-1">
+                    <label for="c2-1">Lo-fi для концентрации</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c2-2">
+                    <label for="c2-2">Эпичный саундтрек</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c2-3">
+                    <label for="c2-3">Звуки леса</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c2-4">
+                    <label for="c2-4">Техно-драйв</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c2-5">
+                    <label for="c2-5">Тишина</label>
+                </div>
+            </div>
+            <div class="description">Используется fieldset и h3 (без legend). Контекст группы будет потерян.</div>
+        </fieldset>
+
+        <div class="filter-card aria" role="group" aria-labelledby="title-aria">
+            <h3 id="title-aria">Рабочее место</h3>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c3-1">
+                    <label for="c3-1">Кактус у монитора</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c3-2">
+                    <label for="c3-2">Удобные наушники</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c3-3">
+                    <label for="c3-3">Вторая печенька</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c3-4">
+                    <label for="c3-4">Настольная лампа</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="c3-5">
+                    <label for="c3-5">Мягкая подставка</label>
+                </div>
+            </div>
+            <div class="description">Используется role="group" и aria-labelledby. Работает аналогично легенде.</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
