@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо: Доступность клавиатуры и ошибка 2.1.1</title>
+    <style>
+        :root {
+            --bg-color: #f5f7fa;
+            --text-color: #1a202c;
+            --card-bg: #ffffff;
+            --primary-blue: #0056b3;
+            --success-green: #2ecc71;
+            --warning-orange: #d97706;
+            --danger-red: #dc2626;
+            --code-bg: #2d3748;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-container {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 320px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            border-top: 8px solid;
+            transition: transform 0.2s;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card.success { border-color: var(--success-green); }
+        .card.danger { border-color: var(--danger-red); }
+        .card.warning { border-color: var(--warning-orange); }
+
+        h2 { margin-top: 0; font-size: 1.25rem; }
+        .description { font-size: 0.9rem; color: #4a5568; min-height: 60px; }
+
+        .demo-area {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px dashed #cbd5e0;
+        }
+
+        /* Стили кнопок */
+        .btn, .btn-fake {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            user-select: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+        }
+
+        .btn:hover { background-color: #004494; }
+
+        .btn-fake {
+            background-color: #edf2f7;
+            color: var(--text-color);
+            border: 1px solid #cbd5e0;
+        }
+
+        /* Фокус — ключевой элемент для 2.1.1 */
+        .btn:focus, .btn-fake:focus {
+            outline: 4px solid #9f7aea;
+            outline-offset: 2px;
+        }
+
+        .counter-box {
+            text-align: center;
+            margin: 1rem 0;
+            padding: 10px;
+            background: #ebf8ff;
+            border-radius: 6px;
+        }
+
+        .counter-label { font-size: 0.8rem; text-transform: uppercase; color: #4a5568; display: block; }
+        .counter-value { font-size: 2.5rem; font-weight: bold; color: var(--primary-blue); transition: transform 0.1s; }
+
+        .code-snippet {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            margin-top: auto;
+            overflow-x: auto;
+        }
+
+        code { font-family: 'Courier New', Courier, monospace; }
+
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Валидация критерия WCAG 2.1.1</h1>
+        <p>Интерактивные элементы должны управляться с клавиатуры. Попробуйте нажать на каждую кнопку, используя <strong>только клавишу Tab и Enter</strong>.</p>
+    </header>
+
+    <main class="demo-container">
+        
+        <section class="card success">
+            <h2>1. Доступно (Native)</h2>
+            <p class="description">Используется тег <code>&lt;button&gt;</code>. Фокус и активация работают «из коробки».</p>
+            
+            <div class="demo-area">
+                <button id="btn-native" class="btn">Нажми меня</button>
+            </div>
+
+            <div class="counter-box">
+                <span class="counter-label">Результат:</span>
+                <div id="count-1" class="counter-value" aria-live="polite">0</div>
+            </div>
+
+            <div class="code-snippet">
+                <code>&lt;button&gt;...&lt;/button&gt;</code>
+            </div>
+        </section>
+
+        <section class="card danger">
+            <h2>2. Ошибка 2.1.1 (Div)</h2>
+            <p class="description">Скринридер скажет "clickable", но фокус сюда не попадет. Клавиатура бессильна.</p>
+            
+            <div class="demo-area">
+                <div class="btn-fake" onclick="updateCount('count-2')">Нажми меня</div>
+            </div>
+
+            <div class="counter-box">
+                <span class="counter-label">Результат:</span>
+                <div id="count-2" class="counter-value" aria-live="polite">0</div>
+            </div>
+
+            <div class="code-snippet">
+                <code>&lt;div onclick="..."&gt;</code>
+            </div>
+        </section>
+
+        <section class="card warning">
+            <h2>3. Role без логики</h2>
+            <p class="description">Фокус есть, роль есть, но обработчик <code>keydown</code> отсутствует. Enter не сработает.</p>
+            
+            <div class="demo-area">
+                <div role="button" tabindex="0" id="btn-role" class="btn-fake">Нажми меня</div>
+            </div>
+
+            <div class="counter-box">
+                <span class="counter-label">Результат:</span>
+                <div id="count-3" class="counter-value" aria-live="polite">0</div>
+            </div>
+
+            <div class="code-snippet">
+                <code>&lt;div role="button" tabindex="0"&gt;</code>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer-note">
+        <p>Создано для демонстрации разницы между визуальной «кликабельностью» и реальной доступностью.</p>
+    </footer>
+
+    <script>
+        // Универсальная функция обновления счетчика
+        function updateCount(id) {
+            const counter = document.getElementById(id);
+            let current = parseInt(counter.innerText);
+            counter.innerText = current + 1;
+            
+            // Анимация для наглядности
+            counter.style.transform = "scale(1.2)";
+            setTimeout(() => {
+                counter.style.transform = "scale(1)";
+            }, 100);
+        }
+
+        // 1. Обработка нативной кнопки (работает по клику и Enter/Space автоматически)
+        document.getElementById('btn-native').addEventListener('click', () => {
+            updateCount('count-1');
+        });
+
+        // 2. Обработка второго кейса происходит через инлайновый onclick в HTML
+        // Это сделано специально для демонстрации того, как делать НЕ НАДО.
+
+        // 3. Обработка кнопки с ролью (намеренно пропускаем keydown)
+        document.getElementById('btn-role').addEventListener('click', () => {
+            updateCount('count-3');
+        });
+    </script>
+</body>
+</html>
