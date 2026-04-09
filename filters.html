@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Store - Демонстрация доступности</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcfcfc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Шапка */
+        header {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-bottom: 1px solid #7b1fa2;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #7b1fa2;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Основной контейнер */
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Сайдбар с фильтрами */
+        aside h2 {
+            font-size: 1.5rem;
+            color: #7b1fa2;
+            margin-bottom: 20px;
+        }
+
+        fieldset {
+            background-color: #fce4ec; /* Светло-розовый */
+            border: 2px solid #7b1fa2; /* Фиолетовая окантовка */
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #7b1fa2;
+            padding: 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .filter-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .filter-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-item input {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* Кнопки "Показать ещё" */
+        .show-more-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #8e24aa;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .show-more-btn:hover {
+            background-color: #7b1fa2;
+        }
+
+        /* Визуальное нажатие (бутафория) */
+        .show-more-btn:active {
+            transform: translateY(2px);
+            background-color: #4a148c;
+        }
+
+        /* БИРЮЗОВЫЙ ФОКУС */
+        .show-more-btn:focus, input:focus {
+            outline: 4px solid #00ced1; /* DarkTurquoise */
+            outline-offset: 3px;
+        }
+
+        /* Правая часть - Плейсхолдеры товаров */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
+        }
+
+        .product-card::after {
+            content: "Карточка товара";
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Fashion Store</h1>
+    </header>
+
+    <div class="container">
+        <aside>
+            <h2>Фильтры</h2>
+
+            <fieldset>
+                <legend>Бренд</legend>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> Gucci</label>
+                    <label class="filter-item"><input type="checkbox"> Prada</label>
+                    <label class="filter-item"><input type="checkbox"> Chanel</label>
+                </div>
+                <button type="button" class="show-more-btn" aria-expanded="false">
+                    Показать ещё
+                </button>
+            </fieldset>
+
+            <fieldset>
+                <legend>Размер</legend>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> XS</label>
+                    <label class="filter-item"><input type="checkbox"> S</label>
+                    <label class="filter-item"><input type="checkbox"> M</label>
+                </div>
+                <button type="button" class="show-more-btn" aria-expanded="false">
+                    Показать ещё
+                </button>
+            </fieldset>
+
+            <fieldset>
+                <legend>Цвет</legend>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> Розовый</label>
+                    <label class="filter-item"><input type="checkbox"> Фиолетовый</label>
+                    <label class="filter-item"><input type="checkbox"> Бирюзовый</label>
+                </div>
+                <button type="button" class="show-more-btn" aria-expanded="false">
+                    Показать ещё
+                </button>
+            </fieldset>
+
+            <fieldset>
+                <legend>Материал</legend>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> Шелк</label>
+                    <label class="filter-item"><input type="checkbox"> Кашемир</label>
+                    <label class="filter-item"><input type="checkbox"> Бархат</label>
+                </div>
+                <button type="button" class="show-more-btn" aria-label="Показать ещё материалы" aria-expanded="false">
+                    Показать ещё
+                </button>
+            </fieldset>
+
+            <fieldset>
+                <legend id="legend-season">Сезон</legend>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> Весна</label>
+                    <label class="filter-item"><input type="checkbox"> Лето</label>
+                    <label class="filter-item"><input type="checkbox"> Осень</label>
+                </div>
+                <button type="button" id="btn-season" class="show-more-btn" aria-labelledby="btn-season legend-season" aria-expanded="false">
+                    Показать ещё
+                </button>
+            </fieldset>
+
+        </aside>
+
+        <main>
+            <div class="content-grid">
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
