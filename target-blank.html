@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Демонстрация WCAG: Ссылки на спецификации</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #333;
+    }
+    h1 { color: #111; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    ul { list-style-type: none; padding: 0; }
+    li { margin-bottom: 25px; padding: 15px; border-left: 4px solid #0066cc; background: #f9f9f9; }
+    strong { display: block; margin-bottom: 5px; color: #555; }
+    
+    /* Стили для ссылок */
+    a {
+      color: #0066cc;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    a:hover { color: #004499; }
+
+    /* Класс Visually Hidden */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Примеры реализации техник G201 и H83 (SC 3.2.5)</h1>
+  <p>Все три ссылки ведут на официальный сайт W3C и открываются в новой вкладке.</p>
+
+  <ul>
+    <li>
+      <strong>Вариант 1: Текстовое предупреждение прямо в ссылке</strong>
+      <a href="https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html" target="_blank" rel="noopener">
+        Понимание критерия успеха 3.2.5: Изменение по запросу (откроется в новой вкладке)
+      </a>
+    </li>
+
+    <li>
+      <strong>Вариант 2: Только визуальная SVG-иконка (без скрытого текста)</strong>
+      <a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G201" target="_blank" rel="noopener">
+        Документация по общей технике G201
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </li>
+
+    <li>
+      <strong>Вариант 3: Иконка для зрячих + скрытый текст для незрячих (Золотой стандарт)</strong>
+      <a href="https://www.w3.org/WAI/WCAG22/Techniques/html/H83" target="_blank" rel="noopener">
+        Спецификация HTML-техники H83
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        <span class="visually-hidden">(откроется в новой вкладке)</span>
+      </a>
+    </li>
+  </ul>
+
+</body>
+</html>
